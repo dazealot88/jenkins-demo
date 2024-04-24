@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout your source code from version control
-                git 'https://github.com/dazealot88/jenkins.git'
+                git branch: 'main', url: 'https://github.com/dazealot88/jenkins-demo.git'
             }
         }
 
@@ -15,11 +15,11 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
-
+    
         stage('Deploy') {
             steps {
                 // Example deployment command, replace with your actual deployment steps
-                deploy adapters: [tomcat9(credentialsId: 'f65bd700-920d-400f-ad6f-547361e2cd5c', path: '', url: 'http://54.172.44.137:8080/')], contextPath: 'bb', war: '**/*.war'
+                deploy adapters: [tomcat9(credentialsId: '42d94bfe-77a3-4b7e-b907-067387e3943c', path: '', url: 'http://18.144.163.189:8080/')], contextPath: 'welcome', war: '**/*.war'
             }
         }
     }
